@@ -3,11 +3,8 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
 
-import java.net.SocketAddress;
-
-public class MYCOURSES implements MessageWithProcess {
+public class MYCOURSES implements Message {
     final int opcode=11;
 
     public MYCOURSES(String substring) {
@@ -21,5 +18,10 @@ public class MYCOURSES implements MessageWithProcess {
         else{
             return new Data(db.getEnrolledCourses(handler).toString());
         }
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

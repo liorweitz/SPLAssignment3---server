@@ -3,12 +3,9 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
-
-import java.net.SocketAddress;
 import java.util.ArrayList;
 
-public class ISREGISTERED implements MessageWithProcess {
+public class ISREGISTERED implements Message {
     final int opcode=8;
     private int courseNum;
 
@@ -28,5 +25,10 @@ public class ISREGISTERED implements MessageWithProcess {
             else
                 return new Data("NOT RGISTERED");
         }
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

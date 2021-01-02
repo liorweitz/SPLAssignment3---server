@@ -3,11 +3,8 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
 
-import java.net.SocketAddress;
-
-public class LOGOUT implements MessageWithProcess {
+public class LOGOUT implements Message {
     final int opcode=4;
     public LOGOUT(String substring) {
     }
@@ -27,5 +24,10 @@ public class LOGOUT implements MessageWithProcess {
 
         }
 
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

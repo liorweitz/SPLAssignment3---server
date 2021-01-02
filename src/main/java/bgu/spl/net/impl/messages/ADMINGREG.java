@@ -3,12 +3,9 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
-
-import java.net.SocketAddress;
 import java.util.Scanner;
 
-public class ADMINGREG implements MessageWithProcess {
+public class ADMINGREG implements Message {
     final int opcode=1;
     private String userName;
     private String pwd;
@@ -40,5 +37,10 @@ public class ADMINGREG implements MessageWithProcess {
             System.out.println("registered");
             return new ACK(opcode);
         }
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

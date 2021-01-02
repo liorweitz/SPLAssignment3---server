@@ -3,12 +3,8 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
 
-import javax.xml.crypto.Data;
-import java.net.SocketAddress;
-
-public class COURSEREG implements MessageWithProcess {
+public class COURSEREG implements Message {
     final int opcode=5;
     private int courseNum;
 
@@ -24,5 +20,10 @@ public class COURSEREG implements MessageWithProcess {
             return new ERR(opcode);
         db.enrollToCourse(handler,courseNum);
         return new ACK(opcode);
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

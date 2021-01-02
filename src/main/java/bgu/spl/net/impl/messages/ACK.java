@@ -1,5 +1,6 @@
 package bgu.spl.net.impl.messages;
 
+import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Message;
 
 public class ACK implements Message {
@@ -9,5 +10,13 @@ public class ACK implements Message {
     public ACK(int ACKWith){
         this.ACKWith=ACKWith;
         System.out.println("ack");
+    }
+
+    public Message process(ConnectionHandler handler){
+        return null;
+    }
+
+    public byte[] encode() {
+        return (String.valueOf(opcode)+String.valueOf(ACKWith)).getBytes();
     }
 }

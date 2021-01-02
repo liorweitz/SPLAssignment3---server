@@ -3,12 +3,9 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
-
-import java.net.SocketAddress;
 import java.util.ArrayList;
 
-public class STUDENTSTAT implements MessageWithProcess {
+public class STUDENTSTAT implements Message {
     final int opcode=8;
     private String studentName;
 
@@ -29,5 +26,10 @@ public class STUDENTSTAT implements MessageWithProcess {
             sb.append(enrolledCourses.toString());
             return new Data(sb.toString());
         }
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

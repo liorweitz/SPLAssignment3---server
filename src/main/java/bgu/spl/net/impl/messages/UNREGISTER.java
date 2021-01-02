@@ -3,12 +3,8 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
 
-import java.net.SocketAddress;
-import java.util.ArrayList;
-
-public class UNREGISTER implements MessageWithProcess {
+public class UNREGISTER implements Message {
     final int opcode=10;
     private int courseNum;
 
@@ -25,5 +21,10 @@ public class UNREGISTER implements MessageWithProcess {
             return new ACK(opcode);
         }
 
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

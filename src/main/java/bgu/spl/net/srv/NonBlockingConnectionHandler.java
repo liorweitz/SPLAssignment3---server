@@ -47,6 +47,9 @@ public class NonBlockingConnectionHandler<T> implements ConnectionHandler<T> {
             return () -> {
                 try {
                     while (buf.hasRemaining()) {
+                        /**
+                         * Message is interface with process and encode methods. T is instance of Message.
+                         */
                         T nextMessage = encdec.decode(buf);
                         if (nextMessage != null) {
                             T response = protocol.process(nextMessage,this);

@@ -1,5 +1,6 @@
 package bgu.spl.net.impl.messages;
 
+import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Message;
 
 public class ERR implements Message {
@@ -9,5 +10,15 @@ public class ERR implements Message {
     public ERR(int error){
         this.errorWith=error;
         System.out.println("error");
+    }
+
+    @Override
+    public Message process(ConnectionHandler handler) {
+        return null;
+    }
+
+    @Override
+    public byte[] encode() {
+        return (String.valueOf(opcode)+String.valueOf(errorWith)).getBytes();
     }
 }

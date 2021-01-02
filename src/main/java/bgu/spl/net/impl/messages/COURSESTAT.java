@@ -3,13 +3,10 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
-
-import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class COURSESTAT implements MessageWithProcess {
+public class COURSESTAT implements Message {
     final int opcode=7;
     private int courseNum;
 
@@ -20,19 +17,24 @@ public class COURSESTAT implements MessageWithProcess {
     @Override
     public Message process(ConnectionHandler handler) {
         Database db= Database.getInstance();
-        if (db.isLoggedIn(handler)!=0)
+        if (db.isLoggedIn(handler)!=0 | db.checkCourseExistance(courseNum))
             return new ERR(opcode);
         else{
             StringBuilder sb=new StringBuilder();
-            Database.Course course=db.getCourse(courseNum);
-            ArrayList<String> enrolledStudents=course.getEnrolledStudents();
+//            Database.Course course=db.getCourse(courseNum);
+            ArrayList<String> enrolledStudents=db.getEnrolledStudents(courseNum);
             Collections.sort(enrolledStudents);
-            sb.append("course: "+"("+courseNum+")"+" "+course.getCourseName());
+            sb.append("course: "+"("+courseNum+")"+" "+db.getCourseName(courseNum));
             sb.append("|");
-            sb.append("Seats Available: "+course.getOccupiedPlaces()+"/"+course.getNumOfMaxStudents());
+            sb.append("Seats Available: "+db.getOccupiedPlaces(courseNum)+"/"+db.getNumOfMaxStudents(courseNum));
             sb.append("|");
             sb.append("Students Registered: "+enrolledStudents.toString());
             return new Data(sb.toString());
         }
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }

@@ -77,6 +77,30 @@ public class Database {
 		courseNumMap.get(courseNum).enrolledStudents.remove(student.getUserName());
 	}
 
+	public ArrayList<String> getEnrolledStudents(int courseNum) {
+		return (courseNumMap.get(courseNum)).enrolledStudents;
+	}
+
+	public String getCourseName(int courseNum) {
+		return (courseNumMap.get(courseNum)).courseName;
+	}
+
+	public int getOccupiedPlaces(int courseNum) {
+		return ((courseNumMap.get(courseNum))).occupiedPlaces;
+	}
+
+	public int getNumOfMaxStudents(int courseNum) {
+		return (courseNumMap.get(courseNum)).numOfMaxStudents;
+	}
+
+	public String getAdminPwd(String userName) {
+		return adminToUserMap.get(userName).getPwd();
+	}
+
+	public String getStudentPwd(String userName) {
+		return studentToUserMap.get(userName).getPwd();
+	}
+
 
 	private static class SingletonHolder {
 		private static Database instance = new Database();
@@ -280,7 +304,7 @@ public class Database {
 		}
 
 		public String getUserName(){return userName;}
-//		public  String getPwd(){return pwd;}
+		public  String getPwd(){return pwd;}
 //		public int getRole(){return role;}
 	}
 

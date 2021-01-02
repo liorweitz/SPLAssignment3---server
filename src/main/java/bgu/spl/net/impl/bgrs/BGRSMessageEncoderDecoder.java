@@ -35,7 +35,7 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 
     @Override
     public byte[] encode(Message message) {
-        return (message + "\n").getBytes(); //uses utf8 by default
+        return (message.encode()); //uses utf8 by default
     }
 
     private void pushByte(byte nextByte) {
@@ -60,7 +60,6 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             if (message != null) {
                 return analyze(message);
             }
-
         }
         return null;
     }
@@ -89,7 +88,7 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
                     return new ISREGISTERED(substring);
             }
         }
-        else {
+        else if(message.charAt(0)=='1'){
             switch (message.charAt(1)) {
                 case '1':
                     return new MYCOURSES(substring);

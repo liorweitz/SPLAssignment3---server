@@ -3,11 +3,10 @@ package bgu.spl.net.impl.messages;
 import bgu.spl.net.srv.ConnectionHandler;
 import bgu.spl.net.srv.Database;
 import bgu.spl.net.srv.Message;
-import bgu.spl.net.srv.MessageWithProcess;
 
 import java.net.SocketAddress;
 
-public class KDAMCHECK implements MessageWithProcess {
+public class KDAMCHECK implements Message {
     final int opcode=6;
     private int courseNum;
 
@@ -21,5 +20,10 @@ public class KDAMCHECK implements MessageWithProcess {
         if (!db.checkCourseExistance(courseNum))
             return new ERR(opcode);
         return new Data(db.getKdam(courseNum).toString());
+    }
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
     }
 }
