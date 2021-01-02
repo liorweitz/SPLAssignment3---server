@@ -1,4 +1,4 @@
-package bgu.spl.net.srv;
+package bgu.spl.net.impl.BGRSServer;
 
 import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.api.MessagingProtocol;
@@ -51,7 +51,7 @@ public class Reactor<T> implements Server<T> {
 
                 selector.select(); //return the channels that are ready for the ops you are interested in
                 runSelectionThreadTasks();
-//iterating the ready channels.
+                //iterating the ready channels.
                 for (SelectionKey key : selector.selectedKeys()) {
 
                     if (!key.isValid()) {

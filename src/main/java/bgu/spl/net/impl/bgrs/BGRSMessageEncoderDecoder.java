@@ -2,13 +2,11 @@ package bgu.spl.net.impl.bgrs;
 
 import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.impl.messages.*;
-import bgu.spl.net.srv.Message;
+import bgu.spl.net.impl.BGRSServer.Message;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.Callable;
 
 public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message> {
 
@@ -64,7 +62,7 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         return null;
     }
 
-    private Message analyze(String message) {
+    public Message analyze(String message) {
         String substring=message.substring(2,message.length());
         if (message.charAt(0)=='0'){
             switch (message.charAt(1)) {

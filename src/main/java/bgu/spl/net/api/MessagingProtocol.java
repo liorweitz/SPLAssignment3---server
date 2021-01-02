@@ -1,8 +1,6 @@
 package bgu.spl.net.api;
 
-import bgu.spl.net.srv.ConnectionHandler;
-
-import java.net.SocketAddress;
+import bgu.spl.net.impl.BGRSServer.ConnectionHandler;
 
 public interface MessagingProtocol<T> {
  

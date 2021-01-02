@@ -1,7 +1,7 @@
 package bgu.spl.net.impl.messages;
 
-import bgu.spl.net.srv.ConnectionHandler;
-import bgu.spl.net.srv.Message;
+import bgu.spl.net.impl.BGRSServer.ConnectionHandler;
+import bgu.spl.net.impl.BGRSServer.Message;
 
 public class Data implements Message {
     private String data;

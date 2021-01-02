@@ -1,8 +1,8 @@
 package bgu.spl.net.impl.bgrs;
 
 import bgu.spl.net.api.MessagingProtocol;
-import bgu.spl.net.srv.ConnectionHandler;
-import bgu.spl.net.srv.Message;
+import bgu.spl.net.impl.BGRSServer.ConnectionHandler;
+import bgu.spl.net.impl.BGRSServer.Message;
 
 public class BGRSProtocol implements MessagingProtocol<Message> {
     @Override

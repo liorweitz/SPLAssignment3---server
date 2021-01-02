@@ -1,8 +1,8 @@
 package bgu.spl.net.impl.messages;
 
-import bgu.spl.net.srv.ConnectionHandler;
-import bgu.spl.net.srv.Database;
-import bgu.spl.net.srv.Message;
+import bgu.spl.net.impl.BGRSServer.ConnectionHandler;
+import bgu.spl.net.impl.BGRSServer.Database;
+import bgu.spl.net.impl.BGRSServer.Message;
 import java.util.Scanner;
 
 public class STUDENTREG implements Message {
