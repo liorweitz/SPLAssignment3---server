@@ -21,6 +21,8 @@ public class STUDENTSTAT implements Message {
         else{
             StringBuilder sb=new StringBuilder();
             ArrayList<Integer> enrolledCourses=db.sortCourseNumList(db.getEnrolledCourses(studentName));
+            sb.append("ACK "+String.valueOf(opcode));
+            sb.append("|");
             sb.append("Studnt: "+studentName);
             sb.append("|");
             sb.append(enrolledCourses.toString());

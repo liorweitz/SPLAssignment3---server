@@ -14,10 +14,11 @@ public class KDAMCHECK implements Message {
 
     @Override
     public Message process(ConnectionHandler handler) {
+        System.out.println("kdam");
         Database db=Database.getInstance();
         if (!db.checkCourseExistance(courseNum))
             return new ERR(opcode);
-        return new Data(db.getKdam(courseNum).toString());
+        return new Data("ACK "+String.valueOf(opcode)+"|"+db.getKdam(courseNum).toString());
     }
 
     @Override

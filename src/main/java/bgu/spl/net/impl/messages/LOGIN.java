@@ -23,7 +23,8 @@ public class LOGIN implements Message {
         if (db.isLoggedIn(handler)==-1) {
             if (db.isAdminExist(userName)) {
 //                Database.User admin = db.getAdmin(userName);
-                if (pwd == db.getAdminPwd(userName)) {
+//                String pass=db.getAdminPwd(userName);
+                if (pwd.equals(db.getAdminPwd(userName))) {
                     db.logIn(handler, userName);
                     System.out.println("logged in");
                     return new ACK(opcode);

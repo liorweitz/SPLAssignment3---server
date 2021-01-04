@@ -21,9 +21,10 @@ public class ISREGISTERED implements Message {
         else{
             ArrayList<Integer> enrolledCourses=db.getEnrolledCourses(handler);
             if (enrolledCourses.contains(courseNum))
-                return new Data("REGISTERED");
+
+                return new Data("ACK "+String.valueOf(opcode)+"|REGISTERED");
             else
-                return new Data("NOT RGISTERED");
+                return new Data("ACK "+String.valueOf(opcode)+"|NOT RGISTERED");
         }
     }
 

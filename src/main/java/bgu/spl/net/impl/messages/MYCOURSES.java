@@ -16,7 +16,7 @@ public class MYCOURSES implements Message {
         if (db.isLoggedIn(handler)!=1)
             return new ERR(opcode);
         else{
-            return new Data(db.getEnrolledCourses(handler).toString());
+            return new Data("ACK "+String.valueOf(opcode)+"|"+db.getEnrolledCourses(handler).toString());
         }
     }
 

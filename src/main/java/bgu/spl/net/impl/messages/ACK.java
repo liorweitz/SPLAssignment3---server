@@ -17,6 +17,6 @@ public class ACK implements Message {
     }
 
     public byte[] encode() {
-        return (String.valueOf(opcode)+String.valueOf(ACKWith)).getBytes();
+        return ("ACK "+String.valueOf(ACKWith)+"\n").getBytes();
     }
 }

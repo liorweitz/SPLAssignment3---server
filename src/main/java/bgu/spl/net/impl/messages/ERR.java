@@ -19,6 +19,6 @@ public class ERR implements Message {
 
     @Override
     public byte[] encode() {
-        return (String.valueOf(opcode)+String.valueOf(errorWith)).getBytes();
+        return ("ERR "+String.valueOf(errorWith)+"\n").getBytes();
     }
 }

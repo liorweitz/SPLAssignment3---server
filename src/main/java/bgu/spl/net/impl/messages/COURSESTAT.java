@@ -24,6 +24,8 @@ public class COURSESTAT implements Message {
 //            Database.Course course=db.getCourse(courseNum);
             ArrayList<String> enrolledStudents=db.getEnrolledStudents(courseNum);
             Collections.sort(enrolledStudents);
+            sb.append("ACK "+String.valueOf(opcode));
+            sb.append("|");
             sb.append("course: "+"("+courseNum+")"+" "+db.getCourseName(courseNum));
             sb.append("|");
             sb.append("Seats Available: "+db.getOccupiedPlaces(courseNum)+"/"+db.getNumOfMaxStudents(courseNum));
