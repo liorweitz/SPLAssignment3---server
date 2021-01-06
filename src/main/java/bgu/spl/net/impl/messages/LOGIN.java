@@ -31,7 +31,7 @@ public class LOGIN implements Message {
                 }
             } else if (db.isStudentExist(userName)) {
 //                Database.User student = db.getStudent(userName);
-                if (pwd == db.getStudentPwd(userName)) {
+                if (pwd.equals(db.getStudentPwd(userName))) {
                     db.logIn(handler, userName);
                     System.out.println("logged in");
                     return new ACK(opcode);

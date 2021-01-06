@@ -17,7 +17,7 @@ public class COURSESTAT implements Message {
     @Override
     public Message process(ConnectionHandler handler) {
         Database db= Database.getInstance();
-        if (db.isLoggedIn(handler)!=0 | db.checkCourseExistance(courseNum))
+        if (db.isLoggedIn(handler)!=0 | !db.checkCourseExistance(courseNum))
             return new ERR(opcode);
         else{
             StringBuilder sb=new StringBuilder();

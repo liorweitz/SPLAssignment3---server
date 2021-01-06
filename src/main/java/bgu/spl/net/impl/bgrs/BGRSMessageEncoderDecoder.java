@@ -88,6 +88,8 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         }
         else if(message.charAt(0)=='1'){
             switch (message.charAt(1)) {
+                case '0':
+                    return new UNREGISTER(substring);
                 case '1':
                     return new MYCOURSES(substring);
             }

@@ -6,7 +6,7 @@ import bgu.spl.net.impl.BGRSServer.Message;
 import java.util.ArrayList;
 
 public class ISREGISTERED implements Message {
-    final int opcode=8;
+    final int opcode=9;
     private int courseNum;
 
     public ISREGISTERED(String substring) {

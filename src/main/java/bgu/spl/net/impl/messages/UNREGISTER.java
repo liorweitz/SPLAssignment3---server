@@ -14,7 +14,7 @@ public class UNREGISTER implements Message {
     @Override
     public Message process(ConnectionHandler handler) {
         Database db=Database.getInstance();
-        if(db.isLoggedIn(handler)!=1 || db.isEnrolled(handler, courseNum))
+        if(db.isLoggedIn(handler)!=1 || !db.isEnrolled(handler, courseNum))
             return new ERR(opcode);
         else{
             db.unregister(handler,courseNum);

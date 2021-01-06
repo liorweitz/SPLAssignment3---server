@@ -10,13 +10,13 @@ public class STUDENTSTAT implements Message {
     private String studentName;
 
     public STUDENTSTAT(String substring) {
-        this.studentName=substring;
+        this.studentName=substring.substring(0,substring.length()-1);
     }
 
     @Override
     public Message process(ConnectionHandler handler) {
         Database db= Database.getInstance();
-        if (db.isLoggedIn(handler)!=0 | db.isStudentExist(studentName))
+        if (db.isLoggedIn(handler)!=0 | !db.isStudentExist(studentName))
             return new ERR(opcode);
         else{
             StringBuilder sb=new StringBuilder();

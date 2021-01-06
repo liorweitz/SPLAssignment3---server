@@ -40,6 +40,10 @@ public class Database {
 		return SingletonHolder.instance;
 	}
 
+	private static class SingletonHolder {
+		private static Database instance = new Database();
+	}
+
 	//checks if a course exists
 	public boolean checkCourseExistance(int courseNum) {
 		return coursesAsListed.contains(courseNum);
@@ -73,8 +77,12 @@ public class Database {
 
 	public void unregister(ConnectionHandler handler, int courseNum) {
 		Student student=(Student) handlerToLoggedUserleanMap.get(handler);
-		student.enrolledCourses.remove(courseNum);
-		courseNumMap.get(courseNum).enrolledStudents.remove(student.getUserName());
+		synchronized (student.enrolledCourses) {
+			student.enrolledCourses.remove(new Integer(courseNum));
+		}
+		synchronized (courseNumMap) {
+			courseNumMap.get(courseNum).enrolledStudents.remove(student.getUserName());
+		}
 	}
 
 	public ArrayList<String> getEnrolledStudents(int courseNum) {
@@ -99,11 +107,6 @@ public class Database {
 
 	public String getStudentPwd(String userName) {
 		return studentToUserMap.get(userName).getPwd();
-	}
-
-
-	private static class SingletonHolder {
-		private static Database instance = new Database();
 	}
 
 	/**
@@ -131,20 +134,27 @@ public class Database {
 	}
 
 	public void adminRegister(String userName,String pwd, ConnectionHandler handler) {
-//		handlerToLoggedUserleanMap.put(handler, false);
-		adminToUserMap.put(userName,new User (userName,pwd,0));}
+		synchronized (adminToUserMap) {
+			adminToUserMap.put(userName, new User(userName, pwd, 0));
+		}
+	}
 	public void studentRegister(String userName,String pwd, ConnectionHandler handler) {
-//		handlerToLoggedUserleanMap.put(handler, false);
-		studentToUserMap.put(userName,new Student (userName,pwd,1));
+		synchronized (studentToUserMap) {
+			studentToUserMap.put(userName, new Student(userName, pwd, 1));
+		}
 	}
 
 
 
 	public void logIn(ConnectionHandler handler, String userName){
-		handlerToLoggedUserleanMap.put(handler,getUser(userName));
+		synchronized (handlerToLoggedUserleanMap) {
+			handlerToLoggedUserleanMap.put(handler, getUser(userName));
+		}
 	}
 	public void logOut(ConnectionHandler handler){
-		handlerToLoggedUserleanMap.remove(handler);
+		synchronized (handlerToLoggedUserleanMap) {
+			handlerToLoggedUserleanMap.remove(handler);
+		}
 	}
 
 	private User getUser(String userName) {
@@ -159,10 +169,14 @@ public class Database {
 
 	public void enrollToCourse(ConnectionHandler handler,int courseNum){
 		Student student=(Student)handlerToLoggedUserleanMap.get(handler);
-		student.enrolledCourses.add(courseNum);
+		synchronized (student) {
+			student.enrolledCourses.add(courseNum);
+		}
 		Course course=courseNumMap.get(courseNum);
-		course.occupiedPlaces++;
-		course.enrolledStudents.add(student.getUserName());
+		synchronized (course) {
+			course.occupiedPlaces++;
+			course.enrolledStudents.add(student.getUserName());
+		}
 	}
 
 	public boolean isAdminExist(String user) {return adminToUserMap.containsKey(user);}
@@ -213,6 +227,9 @@ public class Database {
 	private ArrayList<Integer> parseKdamList(String kdamList) {
 		ArrayList<Integer> unsortedKdamCourseList=new ArrayList<>();
 		StringBuilder sb=new StringBuilder();
+		if (kdamList.length()==2){
+			return unsortedKdamCourseList;
+		}
 		for (int i=1;i<kdamList.length();i++){
 			if (kdamList.charAt(i)==',' | kdamList.charAt(i)==']'){
 				unsortedKdamCourseList.add(Integer.parseInt(sb.toString()));
@@ -231,14 +248,6 @@ public class Database {
 				sortedList.add(coursesAsListed.get(i));
 		}
 		return sortedList;
-	}
-
-
-
-	private void printFile(List<String> lines) {
-		Iterator<String> itr = lines.iterator();
-		while (itr.hasNext())
-			System.out.println(itr.next());
 	}
 
 
@@ -322,6 +331,4 @@ public class Database {
 //			return enrolledCourses;
 //		}
 	}
-
-
 }
