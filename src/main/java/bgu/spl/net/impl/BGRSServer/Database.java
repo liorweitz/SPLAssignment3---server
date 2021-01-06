@@ -134,27 +134,19 @@ public class Database {
 	}
 
 	public void adminRegister(String userName,String pwd, ConnectionHandler handler) {
-		synchronized (adminToUserMap) {
 			adminToUserMap.put(userName, new User(userName, pwd, 0));
-		}
 	}
 	public void studentRegister(String userName,String pwd, ConnectionHandler handler) {
-		synchronized (studentToUserMap) {
 			studentToUserMap.put(userName, new Student(userName, pwd, 1));
-		}
 	}
 
 
 
 	public void logIn(ConnectionHandler handler, String userName){
-		synchronized (handlerToLoggedUserleanMap) {
 			handlerToLoggedUserleanMap.put(handler, getUser(userName));
-		}
 	}
 	public void logOut(ConnectionHandler handler){
-		synchronized (handlerToLoggedUserleanMap) {
 			handlerToLoggedUserleanMap.remove(handler);
-		}
 	}
 
 	private User getUser(String userName) {
