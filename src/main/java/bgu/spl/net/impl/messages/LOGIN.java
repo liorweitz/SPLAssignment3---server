@@ -22,23 +22,17 @@ public class LOGIN implements Message {
         Database db = Database.getInstance();
         if (db.isLoggedIn(handler)==-1) {
             if (db.isAdminExist(userName)) {
-//                Database.User admin = db.getAdmin(userName);
-//                String pass=db.getAdminPwd(userName);
                 if (pwd.equals(db.getAdminPwd(userName))) {
                     db.logIn(handler, userName);
-                    System.out.println("logged in");
                     return new ACK(opcode);
                 }
             } else if (db.isStudentExist(userName)) {
-//                Database.User student = db.getStudent(userName);
                 if (pwd.equals(db.getStudentPwd(userName))) {
                     db.logIn(handler, userName);
-                    System.out.println("logged in");
                     return new ACK(opcode);
                 }
             }
         }
-        System.out.println("not logged in");
         return new ERR(opcode);
     }
 

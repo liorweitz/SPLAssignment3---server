@@ -14,7 +14,6 @@ public class KDAMCHECK implements Message {
 
     @Override
     public Message process(ConnectionHandler handler) {
-        System.out.println("kdam");
         Database db=Database.getInstance();
         if (!db.checkCourseExistance(courseNum))
             return new ERR(opcode);

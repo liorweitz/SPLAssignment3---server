@@ -13,15 +13,9 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
     private byte[] bytes =null;
     private int len = 0;
     private ByteBuffer opcodeBuffer=ByteBuffer.allocate(2);
-//    private byte[] messageBuffer=null;
     short opcode;
     int counter=0;
-//    private Callable<Message>[] buildMap=new Callable[14];
-//    String substring;
-//
-//    public void Initialize(){
-//        buildMap[1]=(substring)->new ADMINGREG(substring);
-//    }
+
 
     @Override
     public Message decodeNextByte(byte nextByte) {
@@ -94,19 +88,6 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         len = 0;
         return result;
     }
-
-//    public Message decode(ByteBuffer buf){
-//
-//        while (buf.hasRemaining()) {
-//            String message = decodeNextByte(buf.get());
-//            if (message != null) {
-//                buf.position(buf.limit());
-//                System.out.println(message);
-//                return analyze(message);
-//            }
-//        }
-//        return null;
-//    }
 
     public Message analyze(String message) {
          switch (opcode) {

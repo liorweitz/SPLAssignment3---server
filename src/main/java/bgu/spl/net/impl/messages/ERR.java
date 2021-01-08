@@ -9,7 +9,6 @@ public class ERR implements Message {
 
     public ERR(int error){
         this.errorWith=error;
-        System.out.println("error");
     }
 
     @Override

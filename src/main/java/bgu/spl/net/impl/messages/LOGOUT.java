@@ -14,12 +14,10 @@ public class LOGOUT implements Message {
         Database db=Database.getInstance();
 
         if (db.isLoggedIn(handler)!=-1){
-            System.out.println("logged out");
             db.logOut(handler);
             return new ACK(opcode);
         }
         else{
-            System.out.println("handler isnt logged in");
             return new ERR(opcode);
 
         }
