@@ -1,5 +1,7 @@
 package bgu.spl.net.api;
 
+import bgu.spl.net.impl.BGRSServer.Message;
+
 import java.nio.ByteBuffer;
 
 public interface MessageEncoderDecoder<T> {
@@ -11,7 +13,7 @@ public interface MessageEncoderDecoder<T> {
      * message
      * @return a message if this byte completes one or null if it doesnt.
      */
-    String decodeNextByte(byte nextByte);
+    T decodeNextByte(byte nextByte);
 
     /**
      * encodes the given message to bytes array
@@ -21,6 +23,6 @@ public interface MessageEncoderDecoder<T> {
      */
     byte[] encode(T message);
 
-    T decode(ByteBuffer buf);
+//    T decode(ByteBuffer buf);
 
 }

@@ -24,7 +24,7 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 //    }
 
     @Override
-    public String decodeNextByte(byte nextByte) {
+    public Message decodeNextByte(byte nextByte) {
         //notice that the top 128 ascii characters have the same representation as their utf-8 counterparts
         //this allow us to do the following comparison
 
@@ -34,23 +34,26 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
                 opcodeBuffer.flip();
                 opcode=opcodeBuffer.getShort();
                 bytes=new byte[1024];
+                if (opcode==4 | opcode==11){
+                    String tmp=popString();
+                    return analyze(tmp);
+                }
             }
         }
         else {
-            if (opcode==4 | opcode==11){
-                return popString();
-            }
-            else if (opcode==8){
+            if (opcode==8){
                 pushByte(nextByte);
                 if (nextByte=='\0'){
-                    return popString();
+                    String tmp=popString();
+                    return analyze(tmp);
                 }
             }
             else if (opcode==5 | opcode==6 | opcode==7 | opcode==9 | opcode==10){
                 pushByte(nextByte);
                 counter++;
                 if (counter==2){
-                    return popString();
+                    String tmp=popString();
+                    return analyze(tmp);
                 }
 
             }
@@ -61,7 +64,8 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
                 }
                 pushByte(nextByte);
                 if (counter==2){
-                    return popString();
+                    String tmp=popString();
+                    return analyze(tmp);
                 }
             }
         }
@@ -91,18 +95,18 @@ public class BGRSMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         return result;
     }
 
-    public Message decode(ByteBuffer buf){
-
-        while (buf.hasRemaining()) {
-            String message = decodeNextByte(buf.get());
-            if (message != null) {
-                buf.position(buf.limit());
-                System.out.println(message);
-                return analyze(message);
-            }
-        }
-        return null;
-    }
+//    public Message decode(ByteBuffer buf){
+//
+//        while (buf.hasRemaining()) {
+//            String message = decodeNextByte(buf.get());
+//            if (message != null) {
+//                buf.position(buf.limit());
+//                System.out.println(message);
+//                return analyze(message);
+//            }
+//        }
+//        return null;
+//    }
 
     public Message analyze(String message) {
          switch (opcode) {

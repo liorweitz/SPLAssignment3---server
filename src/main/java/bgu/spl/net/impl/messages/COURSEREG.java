@@ -15,8 +15,8 @@ public class COURSEREG implements Message {
     @Override
     public Message process(ConnectionHandler handler) {
         Database db= Database.getInstance();
-        if(!(db.checkCourseExistance(courseNum)) || db.isEnrolled(handler, courseNum) | !db.checkKdam(handler,courseNum)
-                | db.isLoggedIn(handler)!=1 | !db.checkPlace(courseNum)){
+        if(!(db.checkCourseExistance(courseNum)) || db.isLoggedIn(handler)!=1 ||db.isEnrolled(handler, courseNum)
+                | !db.checkKdam(handler,courseNum)|!db.checkPlace(courseNum)){
             return new ERR(opcode);
         }
         db.enrollToCourse(handler,courseNum);

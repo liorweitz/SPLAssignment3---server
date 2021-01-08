@@ -21,7 +21,6 @@ public class COURSESTAT implements Message {
             return new ERR(opcode);
         else{
             StringBuilder sb=new StringBuilder();
-//            Database.Course course=db.getCourse(courseNum);
             ArrayList<String> enrolledStudents=db.getEnrolledStudents(courseNum);
             Collections.sort(enrolledStudents);
             sb.append("course: "+"("+courseNum+")"+" "+db.getCourseName(courseNum));

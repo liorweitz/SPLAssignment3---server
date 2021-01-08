@@ -23,7 +23,7 @@ public class STUDENTSTAT implements Message {
             ArrayList<Integer> enrolledCourses=db.sortCourseNumList(db.getEnrolledCourses(studentName));
             sb.append("Studnt: "+studentName);
             sb.append("\n");
-            sb.append(enrolledCourses.toString());
+            sb.append("Courses: "+enrolledCourses.toString());
             return new ACK(opcode, sb.toString());
         }
     }
