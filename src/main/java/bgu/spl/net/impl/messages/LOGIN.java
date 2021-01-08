@@ -12,7 +12,7 @@ public class LOGIN implements Message {
 
     public LOGIN(String substring) {
         Scanner sc=new Scanner(substring);
-        sc.useDelimiter("0");
+        sc.useDelimiter("\0");
         userName=sc.next();
         pwd=sc.next();
     }

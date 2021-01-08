@@ -18,7 +18,7 @@ public class KDAMCHECK implements Message {
         Database db=Database.getInstance();
         if (!db.checkCourseExistance(courseNum))
             return new ERR(opcode);
-        return new Data("ACK "+String.valueOf(opcode)+"|"+db.getKdam(courseNum).toString());
+        return new ACK(opcode,db.getKdam(courseNum).toString());
     }
 
     @Override

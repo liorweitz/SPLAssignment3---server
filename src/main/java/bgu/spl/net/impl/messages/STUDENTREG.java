@@ -12,7 +12,7 @@ public class STUDENTREG implements Message {
 
     public STUDENTREG(String substring){
         Scanner sc=new Scanner(substring);
-        sc.useDelimiter("0");
+        sc.useDelimiter("\0");
         userName=sc.next();
         pwd=sc.next();
     }

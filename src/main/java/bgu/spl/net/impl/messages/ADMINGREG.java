@@ -12,7 +12,7 @@ public class ADMINGREG implements Message {
 
     public ADMINGREG(String substring) {
         Scanner sc=new Scanner(substring);
-        sc.useDelimiter("0");
+        sc.useDelimiter("\0");
         userName=sc.next();
         pwd=sc.next();
     }
